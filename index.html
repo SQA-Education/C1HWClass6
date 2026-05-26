@@ -3,38 +3,40 @@
 .btn-back:hover{background:#e5e7eb}
 
 .option.correct-reveal{background:#dcfce7 !important;border-color:#22c55e !important;color:#166534}
-.option.correct-reveal::after{content:" ✓";font-weight:700;color:#16a34a}
+.option.correct-reveal::after{content:" \2713";font-weight:700;color:#16a34a}
 .option.wrong-reveal{background:#fee2e2 !important;border-color:#ef4444 !important;color:#991b1b}
-.option.wrong-reveal::after{content:" ✗";font-weight:700;color:#dc2626}
+.option.wrong-reveal::after{content:" \2717";font-weight:700;color:#dc2626}
 .option.review-locked{pointer-events:none;cursor:default}
 </style></head><body><div class="container">
-<div class="header"><h1>C1 Job Skills 2 - Class 6 Homework</h1><p>Entrepreneurship and Business Planning • Future Continuous</p></div>
-<div class="section active" id="start"><div class="card"><label>Your Full Name</label><input type="text" id="studentName" placeholder="Enter your name..."><input type="hidden" id="teacherName" value="Hector Amaya">
+<div class="header"><h1>C1 Job Skills 2 - Class 6 Homework</h1><p>Entrepreneurship and Business Planning &bull; Future Continuous</p></div>
+<div class="section active" id="start"><div class="card"><label>Your Full Name</label><input type="text" id="studentName" placeholder="Enter your name..."><input type="hidden" id="teacherName" value="">
 <label>Your Class</label>
-<select id="className" style="width:100%;padding:14px;border:2px solid #e0e0e0;border-radius:12px;font-size:16px;margin-bottom:15px">
+<select id="className" style="width:100%;padding:14px;border:2px solid #e0e0e0;border-radius:12px;font-size:16px;margin-bottom:15px" onchange="setTeacher(this)">
 <option value="">-- Select your class --</option>
 <optgroup label="Hector Amaya">
 <option value="3095" data-teacher="Hector Amaya">3095 - Mon/Wed 8:30 PM (Hector)</option>
 <option value="3100" data-teacher="Hector Amaya">3100 - Tue/Thu 6:30 PM (Hector)</option>
 </optgroup>
-</select><button class="btn" onclick="startQuiz()">Start Homework →</button><div class="note">This homework focuses on entrepreneurship vocabulary, business basics, and future continuous planning.</div></div></div>
-<div class="section" id="s1"><div class="card"><div class="progress"><div class="progress-bar" style="width:20%"></div></div><h2>1. Reading</h2><div class="reading-box"><p><strong>From Side Hustle to Startup</strong></p><p>Turning a side hustle into a real business requires more than enthusiasm.</p><p>Founders often prepare a pitch so they can attract investment.</p><p>A strategic founder might say: next month I will be researching the market, and by the end of the season I will be meeting potential partners.</p></div><div id="readingQuestions"></div><button class="btn" onclick="checkS1()">Continue →</button></div></div>
-<div class="section" id="s2"><div class="card"><button type="button" class="btn-back" onclick="showSection('s1')">← Back</button><div class="progress"><div class="progress-bar" style="width:40%"></div></div><h2>2. Vocabulary</h2><p class="small">Match the key term to its best meaning.</p><div class="word-bank" id="wordBank"></div><div id="vocabDrops"></div><button class="btn" onclick="checkS2()">Continue →</button><div class="tip-box"><strong>Real-life English tip:</strong> Business English sounds stronger when your future plans sound specific and staged.</div></div></div>
-<div class="section" id="s3"><div class="card"><button type="button" class="btn-back" onclick="showSection('s2')">← Back</button><div class="progress"><div class="progress-bar" style="width:60%"></div></div><h2>3. Writing</h2><p class="small">Write 7–9 sentences about a side hustle or business idea. Explain the concept, key business terms, and what you will be doing to develop it.</p><textarea id="writing"></textarea><p class="small" style="text-align:right">Words: <span id="wc">0</span></p><div class="tip-box"><strong>Grammar tip:</strong> Use the future continuous for actions that will be in progress at a future point, especially when describing business plans.</div><div id="wFeedback" class="feedback hidden"></div><button class="btn" id="wBtn" onclick="checkWriting()">Get Feedback →</button><button class="btn hidden" id="wNext" onclick="showSection('s4')">Continue →</button></div></div>
-<div class="section" id="s4"><div class="card"><button type="button" class="btn-back" onclick="showSection('s3')">← Back</button><div class="progress"><div class="progress-bar" style="width:80%"></div></div><h2>4. Speaking</h2><p class="small">Speak for 45–60 seconds about a side hustle idea and explain how you would grow it over time.</p><div class="record-btn" id="recBtn" onclick="toggleRec()"><div class="record-dot"></div></div><div class="timer" id="timer">0:00</div><div class="status" id="recStatus">Click to start recording</div><audio id="audio" controls class="hidden"></audio><div id="transcriptBox" class="transcript-box hidden"></div><div id="sFeedback" class="feedback hidden"></div><button class="btn" id="sBtn" onclick="checkSpeaking()" disabled>Continue →</button></div></div>
-<div class="section" id="s5"><div class="card"><button type="button" class="btn-back" onclick="showSection('s4')">← Back</button><div class="progress"><div class="progress-bar" style="width:100%"></div></div><h2>5. Grammar & Usage</h2><div id="grammarQuestions"></div><button class="btn btn-orange" onclick="submitFinal()">Submit Homework ✓</button></div></div>
-<div class="section" id="results"><div class="score-card"><p style="opacity:.85">Homework Complete!</p><div class="score-big" id="finalPct">0%</div><p id="studentDisplay"></p><div class="scores"><div><label>Reading</label><span id="scL">0/3</span></div><div><label>Vocab</label><span id="scV">0/6</span></div><div><label>Writing</label><span id="scW">0/20</span></div><div><label>Speaking</label><span id="scS">0/20</span></div><div><label>Grammar</label><span id="scG">0/8</span></div></div><button type="button" class="btn" onclick="reviewGrammar()" style="background:#f3f4f6;color:#5B5091;border:1px solid #d1d5db;margin-bottom:10px">📝 Review Your Grammar Answers</button><button id="submitBtn" class="btn btn-orange" style="margin-top:20px" onclick="submitToTeacher()">Finish →</button><div id="submitStatus" style="display:none;margin-top:16px;background:#f0fdf4;border:2px solid #22c55e;border-radius:12px;padding:16px;text-align:center;color:#15803d"></div></div></div></div><script>
+</select><button class="btn" onclick="startQuiz()">Start Homework &rarr;</button><div class="note">This homework focuses on entrepreneurship vocabulary, business basics, and future continuous planning.</div></div></div>
+<div class="section" id="s1"><div class="card"><div class="progress"><div class="progress-bar" style="width:20%"></div></div><h2>1. Reading</h2><div class="reading-box"><p><strong>From Side Hustle to Startup</strong></p><p>Turning a side hustle into a real business requires more than enthusiasm.</p><p>Founders often prepare a pitch so they can attract investment.</p><p>A strategic founder might say: next month I will be researching the market, and by the end of the season I will be meeting potential partners.</p></div><div id="readingQuestions"></div><button class="btn" onclick="checkS1()">Continue &rarr;</button></div></div>
+<div class="section" id="s2"><div class="card"><button type="button" class="btn-back" onclick="showSection('s1')">&larr; Back</button><div class="progress"><div class="progress-bar" style="width:40%"></div></div><h2>2. Vocabulary</h2><p class="small">Match the key term to its best meaning.</p><div class="word-bank" id="wordBank"></div><div id="vocabDrops"></div><button class="btn" onclick="checkS2()">Continue &rarr;</button><div class="tip-box"><strong>Real-life English tip:</strong> Business English sounds stronger when your future plans sound specific and staged.</div></div></div>
+<div class="section" id="s3"><div class="card"><button type="button" class="btn-back" onclick="showSection('s2')">&larr; Back</button><div class="progress"><div class="progress-bar" style="width:60%"></div></div><h2>3. Writing</h2><p class="small">Write 7&ndash;9 sentences about a side hustle or business idea. Explain the concept, key business terms, and what you will be doing to develop it.</p><textarea id="writing"></textarea><p class="small" style="text-align:right">Words: <span id="wc">0</span></p><div class="tip-box"><strong>Grammar tip:</strong> Use the future continuous for actions that will be in progress at a future point, especially when describing business plans.</div><div id="wFeedback" class="feedback hidden"></div><button class="btn" id="wBtn" onclick="checkWriting()">Continue &rarr;</button><button class="btn hidden" id="wNext" onclick="showSection('s4')">Continue &rarr;</button></div></div>
+<div class="section" id="s4"><div class="card"><button type="button" class="btn-back" onclick="showSection('s3')">&larr; Back</button><div class="progress"><div class="progress-bar" style="width:80%"></div></div><h2>4. Speaking</h2><p class="small">Speak for 45&ndash;60 seconds about a side hustle idea and explain how you would grow it over time.</p><div class="record-btn" id="recBtn" onclick="toggleRec()"><div class="record-dot"></div></div><div class="timer" id="timer">0:00</div><div class="status" id="recStatus">Click to start recording</div><audio id="audio" controls class="hidden"></audio><div id="transcriptBox" class="transcript-box hidden"></div><div id="sFeedback" class="feedback hidden"></div><button class="btn" id="sBtn" onclick="checkSpeaking()" disabled>Continue &rarr;</button></div></div>
+<div class="section" id="s5"><div class="card"><button type="button" class="btn-back" onclick="showSection('s4')">&larr; Back</button><div class="progress"><div class="progress-bar" style="width:100%"></div></div><h2>5. Grammar &amp; Usage</h2><div id="grammarQuestions"></div><button class="btn btn-orange" onclick="submitFinal()">Submit Homework &check;</button></div></div>
+<div class="section" id="results"><div class="score-card"><p style="opacity:.85">Homework Complete!</p><div class="score-big" id="finalPct">0%</div><p id="studentDisplay"></p><div class="scores"><div><label>Reading</label><span id="scL">0/3</span></div><div><label>Vocab</label><span id="scV">0/6</span></div><div><label>Writing</label><span id="scW">&#128105;&#8205;&#127979;</span></div><div><label>Speaking</label><span id="scS">0/20</span></div><div><label>Grammar</label><span id="scG">0/8</span></div></div><button type="button" class="btn" onclick="reviewGrammar()" style="background:#f3f4f6;color:#5B5091;border:1px solid #d1d5db;margin-bottom:10px">&#128221; Review Your Grammar Answers</button><button id="submitBtn" class="btn btn-orange" style="margin-top:20px" onclick="submitToTeacher()">Finish &rarr;</button><div id="submitStatus" style="display:none;margin-top:16px;background:#f0fdf4;border:2px solid #22c55e;border-radius:12px;padding:16px;text-align:center;color:#15803d"></div></div></div></div><script>
 const readingQBank=[{"q": "What helps turn a side hustle into a real business?", "opts": ["Research, planning, and understanding customers", "Luck alone", "Only having a logo"], "correct": 0}, {"q": "Why prepare a pitch?", "opts": ["To attract support or investment", "To avoid all risks", "To replace market research"], "correct": 0}, {"q": "What does revenue mean?", "opts": ["Money the business earns", "Only borrowed money", "The number of employees"], "correct": 0}, {"q": "Why is future planning important?", "opts": ["It helps the business grow strategically", "It guarantees instant profit", "It removes the need for customers"], "correct": 0}];
 const vocabPairs=[{"word": "entrepreneur", "def": "a person who starts and runs a business"}, {"word": "startup", "def": "a new company with growth potential"}, {"word": "pitch", "def": "a presentation used to sell an idea"}, {"word": "investment", "def": "money put into a business"}, {"word": "revenue", "def": "money earned from sales"}, {"word": "scalability", "def": "the ability of a business to grow"}];
 const grammarQBank=[{"q": "Choose the best sentence:", "opts": ["Next month, I will be researching the local market.", "Next month, I will researching the local market.", "Next month, I will be research the local market."], "correct": 0}, {"q": "Choose the best sentence:", "opts": ["By June, she will be meeting with potential investors.", "By June, she will meeting with potential investors.", "By June, she will be met with potential investors."], "correct": 0}, {"q": "Choose the most strategic wording:", "opts": ["Over the summer, we will be building our client base.", "Over the summer, we will building our client base.", "Over the summer, we will built our client base."], "correct": 0}, {"q": "Choose the best sentence:", "opts": ["At this time tomorrow, they will be presenting their pitch.", "At this time tomorrow, they will presenting their pitch.", "At this time tomorrow, they will be present their pitch."], "correct": 0}, {"q": "Choose the best sentence:", "opts": ["By winter, the company will be offering more services.", "By winter, the company will offering more services.", "By winter, the company will be offer more services."], "correct": 0}, {"q": "Choose the best sentence:", "opts": ["She hopes she will be running the company full-time next year.", "She hopes she will running the company full-time next year.", "She hopes she will be run the company full-time next year."], "correct": 0}, {"q": "Choose the best sentence:", "opts": ["I will be balancing my job and my side business carefully.", "I will balancing my job and my side business carefully.", "I will be balance my job and my side business carefully."], "correct": 0}, {"q": "Choose the best sentence:", "opts": ["This weekend, we will be testing customer interest online.", "This weekend, we will testing customer interest online.", "This weekend, we will be tested customer interest online."], "correct": 0}];
 let name='',scores={l:0,v:0,w:0,s:0,g:0},writingText='',spokenText='',selectedWord=null,isRec=false,recTime=0,recTimer=null,recognition=null,readingAnswers=[],grammarAnswers=[];
 
 function shuffle(arr){for(let i=arr.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]];}return arr;}
+function setTeacher(sel){var opt=sel.options[sel.selectedIndex];var th=document.getElementById('teacherName');if(th)th.value=opt?(opt.getAttribute('data-teacher')||''):'';}
 function showSection(id){document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');window.scrollTo(0,0);}
 function startQuiz(){
   name=document.getElementById('studentName').value.trim();
   if(!name){alert('Please enter your name');return;}
   if(!document.getElementById('className').value){alert('Please select your class');return;}
+  setTeacher(document.getElementById('className'));
   initQuestions();showSection('s1');
 }
 function sel(el){el.parentElement.querySelectorAll('.option').forEach(o=>o.classList.remove('selected'));el.classList.add('selected');}
@@ -131,28 +133,21 @@ function submitFinal(){
     cb.id='reviewContinueBtn';
     cb.className='btn btn-orange';
     cb.style.marginTop='15px';
-    cb.textContent='Continue to Results →';
+    cb.textContent='Continue to Results \u2192';
     cb.onclick=function(){showSection('results');};
     s5Card.appendChild(cb);
   }
-  const total=scores.l+scores.v+scores.w+scores.s+scores.g;
-  document.getElementById('finalPct').textContent=Math.round(total/57*100)+'%';
+  const total=scores.l+scores.v+scores.s+scores.g;
+  document.getElementById('finalPct').textContent=Math.round(total/37*100)+'%';
   document.getElementById('studentDisplay').textContent=name;
   document.getElementById('scL').textContent=scores.l+'/3';
   document.getElementById('scV').textContent=scores.v+'/6';
-  document.getElementById('scW').textContent=scores.w+'/20';
+  document.getElementById('scW').textContent='\uD83D\uDC69\u200D\uD83C\uDFEB';
   document.getElementById('scS').textContent=scores.s+'/20';
   document.getElementById('scG').textContent=scores.g+'/8';
   showSection('results');
 }
 function reviewGrammar(){showSection('s5');}
-function directSubmit(classLabel){
-  writingText = document.getElementById('writing').value || writingText || '';
-  const total=scores.l+scores.v+scores.w+scores.s+scores.g;const totalPct=Math.round(total/57*100)+'%';const form=document.createElement('form');form.method='POST';form.action='https://docs.google.com/forms/d/e/1FAIpQLSdrVV8m2p8QcgXK-ifK2H6By1kwAdcPm-Yp5SyB6DBgfOTiGw/formResponse';form.target='hidden_iframe';form.style.display='none';const fields={'entry.154629934':name,'entry.771629595':classLabel,'entry.1564061356':'6','entry.1994438750':scores.l+'/3','entry.1169985852':scores.v+'/6','entry.66378887':scores.w+'/20','entry.665897330':scores.s+'/20','entry.1528226896':scores.g+'/8','entry.543147037':totalPct,'entry.301386877':writingText||'','entry.1035810181':spokenText||'','entry.1451249480':'Hector Amaya'};Object.keys(fields).forEach(key=>{const input=document.createElement('input');input.type='hidden';input.name=key;input.value=fields[key];form.appendChild(input);});let iframe=document.getElementById('hidden_iframe');if(!iframe){iframe=document.createElement('iframe');iframe.name='hidden_iframe';iframe.id='hidden_iframe';iframe.style.display='none';document.body.appendChild(iframe);}document.body.appendChild(form);form.submit();form.remove();
-  const btn=document.getElementById('submitBtn');
-  if(btn){btn.disabled=true;btn.textContent='Submitted ✓';btn.style.background='#22c55e';}
-  const status=document.getElementById('submitStatus');
-  if(status){status.innerHTML='✅ <strong>Homework submitted successfully!</strong><br><span style="font-size:0.9em;color:#555">Your teacher has received your work.</span><br><br><button onclick="location.reload()" style="margin-top:8px;padding:10px 20px;background:#5B5091;color:#fff;border:none;border-radius:10px;font-size:15px;cursor:pointer;font-family:inherit">🔄 Retake Homework</button>';status.style.display='block';}}
 
 function initQuestions(){const rQs=shuffle([...readingQBank]).slice(0,3);let rHTML='';rQs.forEach((q,i)=>{const opts=q.opts.map((t,idx)=>({text:t,isCorrect:idx===q.correct}));shuffle(opts);readingAnswers[i]=opts.findIndex(o=>o.isCorrect);rHTML+=`<div class="question"><h4>${i+1}. ${q.q}</h4>`;opts.forEach((opt,j)=>rHTML+=`<div class="option" onclick="sel(this)" data-v="${j}"><div class="circle"></div>${opt.text}</div>`);rHTML+='</div>';});document.getElementById('readingQuestions').innerHTML=rHTML;let bankHTML='',dropHTML='';const pairs=shuffle([...vocabPairs]);const words=shuffle(pairs.map(p=>p.word));words.forEach(w=>bankHTML+=`<div class="word" onclick="pickWord(this)">${w}</div>`);pairs.forEach(p=>dropHTML+=`<div class="drop-row"><div class="drop-def">${p.def}</div><div class="drop-target" data-a="${p.word}" onclick="dropWord(this)"></div></div>`);document.getElementById('wordBank').innerHTML=bankHTML;document.getElementById('vocabDrops').innerHTML=dropHTML;const gQs=shuffle([...grammarQBank]);let gHTML='';gQs.forEach((q,i)=>{const opts=q.opts.map((t,idx)=>({text:t,isCorrect:idx===q.correct}));shuffle(opts);grammarAnswers[i]=opts.findIndex(o=>o.isCorrect);gHTML+=`<div class="question" data-c="${grammarAnswers[i]}"><h4>${i+1}. ${q.q}</h4>`;opts.forEach((opt,j)=>gHTML+=`<div class="option" onclick="sel(this)" data-v="${j}"><div class="circle"></div>${opt.text}</div>`);gHTML+='</div>';});document.getElementById('grammarQuestions').innerHTML=gHTML;}
 document.addEventListener('DOMContentLoaded',function(){var we=document.getElementById('writing');if(we)we.addEventListener('input',function(){document.getElementById('wc').textContent=this.value.trim().split(/\s+/).filter(Boolean).length;});});
@@ -160,14 +155,14 @@ document.addEventListener('DOMContentLoaded',function(){var we=document.getEleme
 function checkWriting(){
   writingText = document.getElementById('writing').value || '';
   const raw = writingText.trim();
-  const words = raw.split(/\s+/).filter(Boolean);
-  const wordCount = words.length;
-  let score = 12;
-  if(wordCount >= 45) score += 5;
-  score += 3;
-  scores.w = Math.min(20, score);
-  document.getElementById('wFeedback').innerHTML = '<b>Score: ' + scores.w + '/20</b><br>This C1 writing score rewards clarity, precision, and strong use of lesson language.';
-  document.getElementById('wFeedback').classList.remove('hidden');
+  const wordCount = raw ? raw.split(/\s+/).filter(Boolean).length : 0;
+  if(wordCount < 15){alert('Please write at least 15 words');return;}
+  const fb = document.getElementById('wFeedback');
+  fb.innerHTML = '<strong>\u2713 Writing Saved</strong><br>'
+    + 'Word count: ' + wordCount
+    + '<br><br><span style="color:#15803d">\uD83D\uDC69\u200D\uD83C\uDFEB <b>Your teacher will read and grade your writing personally.</b></span>'
+    + '<br><span style="color:#555;font-size:0.92em">Writing isn\'t scored automatically because language quality needs a real reader. Your teacher will follow up with your writing score and feedback.</span>';
+  fb.classList.remove('hidden');
   document.getElementById('wBtn').classList.add('hidden');
   document.getElementById('wNext').classList.remove('hidden');
 }
@@ -175,25 +170,26 @@ function checkSpeaking(){scores.s=recTime>=18?18:12;document.getElementById('sFe
 function submitToTeacher(){
   var btn=document.getElementById('submitBtn');
   if(btn){btn.disabled=true;btn.textContent='Submitting...';}
-  var cls=document.getElementById('className')?document.getElementById('className').value:'C1 Class 6';
-  var total=scores.l+scores.v+scores.w+scores.s+scores.g;
-  var totalPct=Math.round(total/57*100)+'%';
+  var cls=document.getElementById('className')?document.getElementById('className').value:'';
+  var teacherVal=document.getElementById('teacherName')?document.getElementById('teacherName').value:'';
+  var total=scores.l+scores.v+scores.s+scores.g;
+  var totalPct=Math.round(total/37*100)+'%';
   var formData=new FormData();
   formData.append('entry.154629934',name);
   formData.append('entry.771629595',cls);
   formData.append('entry.1564061356','6');
   formData.append('entry.1994438750',scores.l+'/3');
   formData.append('entry.1169985852',scores.v+'/6');
-  formData.append('entry.66378887',scores.w+'/20');
+  formData.append('entry.66378887','Teacher will grade');
   formData.append('entry.665897330',scores.s+'/20');
   formData.append('entry.1528226896',scores.g+'/8');
   formData.append('entry.543147037',totalPct);
   formData.append('entry.301386877',writingText||'');
   formData.append('entry.1035810181',spokenText||'No transcript captured');
-  formData.append('entry.1451249480','Angela Gradiska');
+  formData.append('entry.1451249480',teacherVal);
   fetch('https://docs.google.com/forms/d/e/1FAIpQLSdrVV8m2p8QcgXK-ifK2H6By1kwAdcPm-Yp5SyB6DBgfOTiGw/formResponse',{method:'POST',mode:'no-cors',body:formData}).catch(function(){});
-  if(btn){btn.textContent='Submitted ✓';btn.style.background='#22c55e';}
+  if(btn){btn.textContent='Submitted \u2713';btn.style.background='#22c55e';}
   var status=document.getElementById('submitStatus');
-  if(status){status.innerHTML='✅ <strong>Homework submitted successfully!</strong><br><span style="font-size:0.9em;color:#555">Your teacher has received your work.</span><br><br><button onclick="location.reload()" style="margin-top:8px;padding:10px 20px;background:#5B5091;color:#fff;border:none;border-radius:10px;font-size:15px;cursor:pointer;font-family:inherit">🔄 Retake Homework</button>';status.style.display='block';}
+  if(status){status.innerHTML='\u2705 <strong>Homework submitted successfully!</strong><br><span style="font-size:0.9em;color:#555">Your teacher has received your work.</span><br><br><button onclick="location.reload()" style="margin-top:8px;padding:10px 20px;background:#5B5091;color:#fff;border:none;border-radius:10px;font-size:15px;cursor:pointer;font-family:inherit">\uD83D\uDD04 Retake Homework</button>';status.style.display='block';}
 }
 </script></body></html>
